@@ -1,41 +1,45 @@
-# Syfe Personal Finance Manager — Combined Project
+# Personal Finance Manager
 
-This project contains the Java Spring Boot backend and a plain HTML/CSS/JavaScript frontend served by the same application.
+A simple personal finance application with a Java Spring Boot backend and an HTML, CSS, and JavaScript frontend.
 
-## Run on Windows / VS Code
+# Run Locally on Windows
 
 1. Install JDK 17 or newer and Maven.
-2. Open this folder in VS Code (the folder containing `pom.xml`).
-3. In the VS Code terminal run:
+2. Open this project folder in VS Code (the folder containing `pom.xml`).
+3. Open the terminal and run:
 
    ```powershell
    mvn clean test
    mvn spring-boot:run
    ```
 
-4. Open **http://localhost:8080/** in your browser.
-5. Use **Login** with an account registered through `POST /api/auth/register`. API requests use the same origin and session cookie.
+4. Open http://localhost:8080/ in your browser.
 
-## API health check
+## Register and Log In
 
-Open http://localhost:8080/api/health. Expected response: `{"status":"UP"}`.
+If you are using a new database, register an account first. Then log in with the same email and password.
 
-## Frontend files
+## API Health Check
 
-The frontend is in `src/main/resources/static/`:
-- `index.html`
-- `style.css`
-- `app.js`
+Open http://localhost:8080/api/health.
 
-Spring Boot serves these files from the same host as the API, so local browser CORS configuration is not required.
+Expected response:
 
-## Important before submission
+```json
+{"status":"UP"}
+```
 
-- The frontend/backend bundle is a starter implementation and has not been verified against Syfe's full `financial_manager_tests.sh` suite.
-- Run `mvn clean test`, then test the provided assignment script against the deployed API if the recruiter supplied it.
-- The configured H2 database is in-memory by default; its data resets when the application restarts. Configure persistent database storage before relying on data after deployment.
-- Review API validation, session security, DTO architecture, error responses and unit-test coverage against the assignment requirements before submission.
+## Frontend Files
 
+The frontend files are located in `src/main/resources/static/`:
 
-### Login troubleshooting
-Open the app at `http://localhost:8080/`. If you have not created an account in this database yet, click **Register** first, then log in. The local default database is now file-based H2 (`./financedb`) so local accounts/data survive a normal application restart. If you previously used the old in-memory database, register your account again once. Use the same email and password for later logins.
+ `index.html`
+ `style.css`
+ `app.js`
+
+Spring Boot serves the frontend and API from the same application, so separate CORS configuration is not needed for local use.
+
+## Database
+
+The application uses an H2 SQL database. The local file-based database is configured to retain data across normal application restarts. Data on a hosting platform may not persist unless persistent storage or a managed database is configured.
+
